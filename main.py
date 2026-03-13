@@ -210,14 +210,20 @@ def get():
 
                     id='pinicial', cls='hero-section'
                 ),
-                
-                # SVG Wave Separator
-                NotStr('''
-                <svg class="wave wave-superior" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                  <path class="wave-base" fill="var(--bg-light)" fill-opacity="1" d="M0,160 C480,240 960,80 1440,160 L1440,320 L0,320 Z"></path>
-                </svg>
-                '''),
-                Section(
+                # 3D Crystal Divider instead of SVG Wave
+                Div(
+                    Div(
+                        Div(cls='crystal-face front'),
+                        Div(cls='crystal-face back'),
+                        Div(cls='crystal-face left'),
+                        Div(cls='crystal-face right'),
+                        Div(cls='crystal-face top'),
+                        Div(cls='crystal-face bottom'),
+                        cls='crystal-3d'
+                    ),
+                    cls='divider-3d-container'
+                ),
+                                Section(
                     H1('Details', cls='hidden-element slide-up', style='font-family: "Great Vibes"; font-size: 3.5rem; text-align: center; color: var(--accent); margin-bottom: 3rem;'),
                     Div(
                         # Card 1: Date & Time
