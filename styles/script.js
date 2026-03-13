@@ -93,18 +93,72 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 2. Envelope Animation
-  const envelope = document.querySelector(".envelope");
-  const envelopeWrapper = document.querySelector(".envelope-wrapper");
+  // 2. Glass Monolith 3D Interactive Physics
+  const monolith = document.querySelector(".glass-monolith");
+  const monolithGlare = document.querySelector(".monolith-glare");
+  let isFlipped = false;
 
-  if (envelope) {
-    envelope.addEventListener("click", () => {
-      envelope.classList.add("open");
-      setTimeout(() => {
-        envelopeWrapper.classList.add("hidden");
-        document.body.style.overflowY = "visible";
-      }, 3000);
+  if (monolith && !isTouchDevice()) {
+    monolith.addEventListener("mousemove", (e) => {
+      if (isFlipped) return; // Stop tracking when flipped
+      const rect = monolith.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      // Calculate rotation (max 15 degrees)
+      const rotateX = ((y - centerY) / centerY) * -15;
+      const rotateY = ((x - centerX) / centerX) * 15;
+
+      // Calculate glare shift
+      const glareX = (x / rect.width) * 100 - 50;
+      const glareY = (y / rect.height) * 100 - 50;
+
+      monolith.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      monolith.style.transition = "none";
+
+      if (monolithGlare) {
+        monolithGlare.style.transform = `translate(${glareX}%, ${glareY}%) rotate(${rotateX * -2}deg)`;
+      }
     });
+
+    monolith.addEventListener("mouseleave", () => {
+      if (isFlipped) return;
+      monolith.style.transform = "rotateX(0deg) rotateY(0deg)";
+      monolith.style.transition =
+        "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
+      if (monolithGlare) {
+        monolithGlare.style.transform = "translate(0%, 0%) rotate(0deg)";
+      }
+    });
+  }
+
+  // Click to open and reveal message
+  if (monolith) {
+    monolith.addEventListener("click", (e) => {
+      // Don't trigger if clicking the internal link
+      if (e.target.closest("a")) return;
+
+      if (!monolith.classList.contains("monolith-opened")) {
+        monolith.classList.add("monolith-opened");
+        document.body.style.overflowY = "visible"; // Allow scrolling
+      } else {
+        monolith.classList.remove("monolith-opened");
+      }
+    });
+
+    // Handle scroll to details specifically
+    const detailBtn = monolith.querySelector(".open-btn-container a");
+    if (detailBtn) {
+      detailBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const target = document.querySelector("#details");
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    }
   }
 
   // 3. Scroll Reveal via IntersectionObserver
@@ -219,6 +273,108 @@ document.addEventListener("DOMContentLoaded", () => {
   sections.forEach((section) => {
     navObserver.observe(section);
   });
+
+  // 8. Hero Interactive Mouse Parallax
+  const heroEl = document.getElementById("pinicial");
+  const spotlight = document.getElementById("hero-spotlight");
+  const parallaxLayers = document.querySelectorAll(".hero-parallax-layer");
+
+  if (heroEl && !isTouchDevice()) {
+    let mouseX = 0,
+      mouseY = 0;
+    let spotX = 0,
+      spotY = 0;
+    let rafId = null;
+
+    heroEl.addEventListener(
+      "mousemove",
+      (e) => {
+        const rect = heroEl.getBoundingClientRect();
+        // Normalize -0.5 to 0.5 from center
+        mouseX = (e.clientX - rect.left - rect.width / 2) / rect.width;
+        mouseY = (e.clientY - rect.top - rect.height / 2) / rect.height;
+        spotX = e.clientX - rect.left;
+        spotY = e.clientY - rect.top;
+      },
+      { passive: true },
+    );
+
+    function animateParallax() {
+      // Move each layer based on its data-depth
+      parallaxLayers.forEach((layer) => {
+        const depth = parseFloat(layer.dataset.depth || 0);
+        const moveX = mouseX * depth * 80; // max 80px shift
+        const moveY = mouseY * depth * 50; // max 50px shift
+        layer.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      });
+
+      // Move spotlight
+      if (spotlight) {
+        spotlight.style.left = spotX + "px";
+        spotlight.style.top = spotY + "px";
+        spotlight.style.opacity = "1";
+      }
+
+      rafId = requestAnimationFrame(animateParallax);
+    }
+
+    heroEl.addEventListener("mouseenter", () => {
+      if (!rafId) rafId = requestAnimationFrame(animateParallax);
+    });
+    heroEl.addEventListener("mouseleave", () => {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+      // Reset all layers
+      parallaxLayers.forEach((l) => (l.style.transform = ""));
+      if (spotlight) spotlight.style.opacity = "0";
+    });
+  }
+});
+
+// 9. 3D Mouse-Tracking Tilt on .tilt-card elements
+// Only active on non-touch devices
+const isTouchDevice = () => window.matchMedia("(hover: none)").matches;
+
+if (!isTouchDevice()) {
+  document.querySelectorAll(".tilt-card").forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      // Max tilt: 12 degrees
+      const rotateX = ((y - centerY) / centerY) * -12;
+      const rotateY = ((x - centerX) / centerX) * 12;
+      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.04, 1.04, 1.04)`;
+      card.style.transition = "none";
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.transform =
+        "perspective(800px) rotateX(0) rotateY(0) scale3d(1, 1, 1)";
+      card.style.transition = "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
+    });
+    card.addEventListener("mouseenter", () => {
+      card.style.transition = "none";
+    });
+  });
+}
+
+// 10. Scroll-Depth 3D Reveal for .scroll-3d elements
+const scroll3dObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("scroll-3d-active");
+        scroll3dObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+);
+
+document.querySelectorAll(".scroll-3d").forEach((el) => {
+  scroll3dObserver.observe(el);
 });
 
 window.toggleMenu = function () {

@@ -145,41 +145,69 @@ def get():
             ), id='nav-menu'),
 
             Main(
-                # Section 1: Hero Envelope
+                # Section 1: Hero — Interactive 3D Parallax Scene
                 Section(
-                    Div(id='particles-js', cls='particles-overlay'),
+                    # Cursor spotlight (moves with mouse via JS)
+                    Div(id='hero-spotlight', cls='hero-spotlight'),
+
+                    # Particles layer (far background — slowest)
+                    Div(id='particles-js', cls='particles-overlay hero-parallax-layer', **{'data-depth': '0.1'}),
+
+                    # Ambient orbs (far — slow drift)
+                    Div(cls='hero-orb hero-orb-1 hero-parallax-layer', **{'data-depth': '0.15'}),
+                    Div(cls='hero-orb hero-orb-2 hero-parallax-layer', **{'data-depth': '0.12'}),
+
+                    # Depth rings layer (mid-back)
+                    Div(
+                        Div(cls='depth-ring depth-ring-1'),
+                        Div(cls='depth-ring depth-ring-2'),
+                        Div(cls='depth-ring depth-ring-3'),
+                        cls='hero-parallax-layer', **{'data-depth': '0.25'}
+                    ),
+
+                    # Floating floral icons (mid — medium speed)
+                    Div(
+                        I(cls='fas fa-leaf hero-float-icon', style='top:12%; left:8%;'),
+                        I(cls='fas fa-heart hero-float-icon', style='top:15%; right:9%; animation-delay: 1.2s;'),
+                        I(cls='fas fa-spa hero-float-icon', style='bottom:22%; left:6%; animation-delay: 2.4s;'),
+                        I(cls='fas fa-ring hero-float-icon', style='bottom:20%; right:7%; animation-delay: 0.8s;'),
+                        I(cls='fas fa-dove hero-float-icon', style='top:38%; left:3%; font-size:1.2rem; animation-delay: 3s;'),
+                        I(cls='fas fa-dove hero-float-icon', style='top:35%; right:4%; font-size:1.2rem; animation-delay: 1.8s;'),
+                        cls='hero-parallax-layer', **{'data-depth': '0.4'}
+                    ),
+
+                    # Glass Monolith — center focal layer
                     Div(
                         Div(
+                            # Reveal layer
                             Div(
-                                Div(cls='flap left'),
-                                Div(cls='flap right'),
-                                Div(cls='flap top'),
-                                Div(cls='flap bottom'),
-                                Div(cls='seal'),
                                 Div(
-                                    I(cls='fas fa-hand-pointer fa-2x'),
-                                    Span('Tap to open', cls='click-text', style='display:block; margin-top:5px;'),
-                                    cls='click-indicator'
+                                    H2('S & D', cls='reveal-title'),
+                                    P("To our dearest family and friends", cls='reveal-text'),
+                                    P("We invite you to join us in celebrating our love and new beginnings.", cls='reveal-text'),
+                                    Div(A('VIEW DETAILS', href='#details', cls='btn btn-animado', style='margin-top: 1rem;'), cls='open-btn-container'),
+                                    cls='reveal-inner'
                                 ),
-                                Div(
-                                    H4("We're Getting Married!", style='font-family: "Great Vibes"; font-size: 2.2rem; color: var(--accent); margin-bottom: 10px; text-align: center; line-height: 1.2;'),
-                                    H1('Sarah & David', style='font-family: "Great Vibes"; font-size: 3rem; color: #333; margin-bottom: 20px; text-align: center; line-height: 1.1;'),
-                                    P('We would love for you to join us', cls='texto-abajo', style='text-align:center; font-family:"Benne", serif; font-size: 1.2rem;'),
-                                    cls='letter'
-                                ),
-                                cls='envelope'
+                                cls='monolith-reveal'
                             ),
-                            cls='envelope-container'
+                            # Left Gate
+                            Div(
+                                Div(cls='monolith-glare'),
+                                Div(H1('S & D', cls='monolith-monogram'), cls='monolith-content'),
+                                cls='monolith-gate gate-left'
+                            ),
+                            # Right Gate
+                            Div(
+                                Div(cls='monolith-glare'),
+                                Div(H1('S & D', cls='monolith-monogram'), cls='monolith-content'),
+                                cls='monolith-gate gate-right'
+                            ),
+                            cls='glass-monolith'
                         ),
-                        cls='wrapper envelope-wrapper glow-pulse floating-magic'
+                        cls='monolith-container hero-parallax-layer', **{'data-depth': '0.55'}
                     ),
-                    
-                    Div(
-                        H3('SPECIAL INVITATION', cls='fade-in-up', style='font-family: "Montserrat"; letter-spacing: 4px; font-size: 1.2rem; margin-bottom: 0.5rem;'),
-                        H2('Sarah & David', cls='fade-in-up delay-1s', style='font-family: "Great Vibes"; font-size: clamp(3.5rem, 10vw, 6rem); color: var(--accent); text-shadow: 2px 2px 4px rgba(0,0,0,0.5); line-height: 1.1;'),
-                        H3('June 15, 2026', cls='fade-in-up delay-2s', style='font-family: "Benne", serif; font-size: 1.5rem; letter-spacing: 2px; margin-top: 1rem;'),
-                        cls='overlay-text'
-                    ),
+
+
                     id='pinicial', cls='hero-section'
                 ),
                 
@@ -208,7 +236,7 @@ def get():
                                 ),
                                 cls='flip-card-inner'
                             ),
-                            cls='flip-card hidden-element slide-up'
+                            cls='flip-card tilt-card scroll-3d hidden-element slide-up'
                         ),
                         # Card 2: Venue
                         Div(
@@ -226,7 +254,7 @@ def get():
                                 ),
                                 cls='flip-card-inner'
                             ),
-                            cls='flip-card hidden-element slide-up', style='transition-delay: 0.2s;'
+                            cls='flip-card tilt-card scroll-3d delay-1 hidden-element slide-up'
                         ),
                         # Card 3: Dress Code
                         Div(
@@ -244,7 +272,7 @@ def get():
                                 ),
                                 cls='flip-card-inner'
                             ),
-                            cls='flip-card hidden-element slide-up', style='transition-delay: 0.4s;'
+                            cls='flip-card tilt-card scroll-3d delay-2 hidden-element slide-up'
                         ),
                         cls='details-grid'
                     ),
@@ -326,7 +354,7 @@ def get():
                         P('Kindly secure your reservation and let us celebrate together.', cls='hidden-element slide-up', style='font-family: "Montserrat"; color: var(--dark); margin-bottom: 2rem; position: relative; z-index: 2;'),
                         Button('RSVP NOW', cls='btn btn-animado btn-shimmer hidden-element scale-up', onclick='openAttendanceModal()', style='position: relative; z-index: 2;'), 
                         
-                        cls='rsvp-banner text-center', style='position: relative; max-width: 800px; margin: 0 auto; padding: 4rem 2rem; border-radius: 20px;'
+                        cls='rsvp-banner tilt-card scroll-3d text-center', style='position: relative; max-width: 800px; margin: 0 auto; padding: 4rem 2rem; border-radius: 20px;'
                     ),
                     Div(Div(Span('×', cls='attendance-close', onclick='closeAttendanceModal()'),
                             H3('Join our Special Day', cls='hidden-element slide-up', style='font-family: "Benne", serif; font-size: 2rem; text-align: center; margin-bottom: 1rem; color: #333;'),
