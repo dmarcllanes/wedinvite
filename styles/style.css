@@ -1408,7 +1408,15 @@ body {
   transform: translate(0, 0) scale(1);
 }
 
+@media (max-width: 1024px) {
+  /* Tablets: shrink details grid to 2 columns */
+  .details-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
+  /* --- Navbar --- */
   .menu-toggle {
     display: block;
   }
@@ -1417,12 +1425,50 @@ body {
     display: none;
   }
 
-  .envelope-con .details-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  .header {
+    padding: 10px 16px;
   }
 
-  /* Timeline */
+  /* --- Hero / Envelope --- */
+  .hero-section {
+    min-height: 90vh;
+  }
+
+  .wrapper.envelope-wrapper {
+    transform: scale(0.85);
+  }
+
+  .overlay-text {
+    top: 62%;
+  }
+
+  .overlay-text h2 {
+    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+  }
+
+  .overlay-text h3 {
+    font-size: 1rem !important;
+  }
+
+  /* --- Top Banner --- */
+  .top-banner {
+    font-size: 0.85rem;
+  }
+
+  /* --- Details Flip Cards --- */
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .flip-card {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  /* --- Timeline --- */
   .timeline::before {
     left: 40px;
   }
@@ -1430,7 +1476,7 @@ body {
   .timeline-item {
     width: 100%;
     padding-left: 80px;
-    padding-right: 20px;
+    padding-right: 16px;
   }
 
   .timeline-item.right {
@@ -1442,7 +1488,28 @@ body {
     left: 25px;
   }
 
-  /* Memories Carousel */
+  .text,
+  .text1 {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .timeline-card {
+    width: 100%;
+    padding: 1.2rem;
+  }
+
+  .progress-line {
+    left: 30px;
+  }
+
+  .circle {
+    left: 10px !important;
+    right: auto !important;
+  }
+
+  /* --- Memories / Gallery --- */
   .scrolling-wrapper {
     mask-image: linear-gradient(
       to right,
@@ -1464,19 +1531,21 @@ body {
     width: 240px;
   }
 
-  /* Music */
-  .progress-line {
-    left: 30px;
+  /* --- RSVP Section --- */
+  .rsvp-banner {
+    padding: 2.5rem 1.2rem !important;
+    margin: 0 1rem !important;
   }
 
-  .circle {
-    left: 10px !important;
-    right: auto !important;
+  .rsvp-banner h1 {
+    font-size: clamp(2rem, 8vw, 3rem) !important;
   }
 
+  /* --- Countdown Bottom Navbar --- */
   .countdown-inner {
     flex-direction: column;
     gap: 8px;
+    padding: 0 10px;
   }
 
   .countdown-title-wrapper span {
@@ -1504,19 +1573,94 @@ body {
   .mini-unit .label {
     font-size: 0.55rem;
   }
-}
 
-@media (max-width: 380px) {
-  .envelope-container {
-    transform: scale(0.75);
+  /* --- Section Padding --- */
+  .section-padding {
+    padding: 3rem 1rem;
+  }
+
+  h1.section-title,
+  section h1 {
+    font-size: 2.5rem;
+  }
+
+  /* --- RSVP Modal Form --- */
+  .attendance-modal-content {
+    padding: 2rem 1.2rem;
+    width: 92vw;
+    max-width: 100%;
+    border-radius: 12px;
+  }
+
+  .form-input {
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+  }
+
+  /* --- BTN button --- */
+  .btn {
+    padding: 0.85rem 2rem;
+    font-size: 0.95rem;
   }
 }
 
-/* Very Small Mobile Details */
 @media (max-width: 480px) {
+  /* --- Gallery --- */
   .gallery-item {
     width: 180px;
     border-radius: 10px;
+  }
+
+  /* --- Envelope --- */
+  .wrapper.envelope-wrapper {
+    transform: scale(0.75);
+  }
+
+  .overlay-text {
+    top: 65%;
+  }
+
+  /* --- Bottom Countdown Nav --- */
+  .bottom-sticky-nav {
+    padding: 8px 10px;
+  }
+
+  .countdown-title-wrapper {
+    display: none;
+    /* Hide the title on very small screens – show numbers only */
+  }
+
+  .countdown-inner {
+    flex-direction: row;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  /* --- Flip Cards --- */
+  .flip-card {
+    height: 260px;
+  }
+
+  /* --- RSVP Banner icons hide on small screens --- */
+  .bobbing-icon,
+  .spinning-icon {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  /* --- Envelope Smaller --- */
+  .envelope-container {
+    transform: scale(0.7);
+  }
+
+  .overlay-text {
+    top: 68%;
+  }
+
+  /* --- Navbar Logo text --- */
+  .logo {
+    font-size: 1rem;
   }
 }
 
