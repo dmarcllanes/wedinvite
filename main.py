@@ -337,6 +337,18 @@ def get():
                             Div(Img(src='https://images.unsplash.com/photo-1532712938736-2834cb01b8bf?auto=format&fit=crop&w=600&q=80', alt='Memory 4', cls='gallery-img'), cls='gallery-item'),
                             Div(Img(src='https://images.unsplash.com/photo-1583939000140-5b5c970428d0?auto=format&fit=crop&w=600&q=80', alt='Memory 5', cls='gallery-img'), cls='gallery-item'),
                             Div(Img(src='https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=600&q=80', alt='Memory 6', cls='gallery-img'), cls='gallery-item'),
+                            Div(Img(src='https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80', alt='Memory 1', cls='gallery-item'), cls='gallery-item'),
+                            Div(Img(src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80', alt='Memory 2', cls='gallery-img'), cls='gallery-item'),
+                            Div(Img(src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80', alt='Memory 3', cls='gallery-item'), cls='gallery-item'),
+                            Div(Img(src='https://images.unsplash.com/photo-1532712938736-2834cb01b8bf?auto=format&fit=crop&w=600&q=80', alt='Memory 4', cls='gallery-item'), cls='gallery-item'),
+                            Div(Img(src='https://images.unsplash.com/photo-1583939000140-5b5c970428d0?auto=format&fit=crop&w=600&q=80', alt='Memory 5', cls='gallery-item'), cls='gallery-item'),
+                            Div(Img(src='https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=600&q=80', alt='Memory 6', cls='gallery-item'), cls='gallery-item'),
+                            Div(Img(src='https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80', alt='Memory 1', cls='gallery-img'), cls='gallery-item'),
+                            Div(Img(src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80', alt='Memory 2', cls='gallery-img'), cls='gallery-item'),
+                            Div(Img(src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80', alt='Memory 3', cls='gallery-img'), cls='gallery-item'),
+                            Div(Img(src='https://images.unsplash.com/photo-1532712938736-2834cb01b8bf?auto=format&fit=crop&w=600&q=80', alt='Memory 4', cls='gallery-img'), cls='gallery-item'),
+                            Div(Img(src='https://images.unsplash.com/photo-1583939000140-5b5c970428d0?auto=format&fit=crop&w=600&q=80', alt='Memory 5', cls='gallery-img'), cls='gallery-item'),
+                            Div(Img(src='https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=600&q=80', alt='Memory 6', cls='gallery-img'), cls='gallery-item'),
                             cls='scrolling-track'
                         ),
                         cls='scrolling-wrapper hidden-element slide-up'

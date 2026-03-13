@@ -180,6 +180,123 @@ document.addEventListener("DOMContentLoaded", () => {
   const revealElements = document.querySelectorAll(".hidden-element");
   revealElements.forEach((el) => observer.observe(el));
 
+// Interactive 3D Particle Background
+const init3DBackground = () => {
+  const canvas = document.getElementById('hero-3d-bg');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let width, height;
+  let particles = [];
+  
+  // Theme colors
+  const colors = [
+    'rgba(212, 175, 55, 0.6)',  // Gold
+    'rgba(240, 230, 210, 0.5)', // Cream
+    'rgba(138, 156, 140, 0.4)'  // Sage
+  ];
+
+  const setSize = () => {
+    width = window.innerWidth;
+    height = window.innerHeight; // Or hero section height
+    canvas.width = width;
+    canvas.height = height;
+  };
+
+  class Particle {
+    constructor() {
+      this.reset(true);
+    }
+
+    reset(initial = false) {
+      this.x = Math.random() * width;
+      this.y = initial ? Math.random() * height : height + Math.random() * 50;
+      this.z = Math.random() * 2; // Depth (0 relates closely, 2 is far away)
+      this.size = (Math.random() * 2 + 0.5) / (this.z + 0.5);
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = -(Math.random() * 0.5 + 0.2) / (this.z + 0.5); // Float upwards
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.active = true;
+    }
+
+    update() {
+      // Parallax effect with mouse
+      const mouseOffset = {
+        x: (mouseX - width / 2) * 0.05 / (this.z + 0.5),
+        y: (mouseY - height / 2) * 0.05 / (this.z + 0.5)
+      };
+
+      this.x += this.vx - mouseOffset.x * 0.01;
+      this.y += this.vy - mouseOffset.y * 0.01;
+
+      // Wrap around or reset
+      if (this.y < -50 || this.x < -50 || this.x > width + 50) {
+        this.reset();
+      }
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+    }
+  }
+
+  const initParticles = () => {
+    particles = [];
+    const count = Math.min((width * height) / 10000, 150); // Responsive count
+    for (let i = 0; i < count; i++) {
+      particles.push(new Particle());
+    }
+  };
+
+  let animationFrame;
+  const render = () => {
+    ctx.clearRect(0, 0, width, height);
+    
+    // Draw connections
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const p1 = particles[i];
+        const p2 = particles[j];
+        const dx = p1.x - p2.x;
+        const dy = p1.y - p2.y;
+        const distSq = dx * dx + dy * dy;
+        
+        // Connect if close enough in 2D space, and similar Z-depth
+        if (distSq < 15000 && Math.abs(p1.z - p2.z) < 0.5) {
+          const alpha = 1 - (distSq / 15000);
+          ctx.strokeStyle = `rgba(212, 175, 55, ${alpha * 0.2})`; // Subtle gold lines
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+
+    animationFrame = requestAnimationFrame(render);
+  };
+
+  window.addEventListener('resize', () => {
+    setSize();
+    initParticles();
+  });
+
+  setSize();
+  initParticles();
+  render();
+};
+
+init3DBackground();
+
   // 4. Countdown (Target: June 15, 2026 16:00:00)
   const targetDate = new Date("Jun 15, 2026 16:00:00").getTime();
 
