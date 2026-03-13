@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join us for an unforgettable celebration of love and commitment">
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Wedding Invite">
+
+    <link rel="manifest"
+        href="data:application/manifest+json,{%22name%22:%22Sarah%20%26%20David's%20Wedding%22,%22short_name%22:%22Wedding%22,%22start_url%22:%22/%22,%22display%22:%22standalone%22,%22background_color%22:%22%231a1a1a%22,%22theme_color%22:%22%23d4af37%22,%22orientation%22:%22portrait-primary%22,%22icons%22:[{%22src%22:%22data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20192%20192'%3E%3Crect%20fill='%231a1a1a'%20width='192'%20height='192'/%3E%3Ctext%20x='50%25'%20y='50%25'%20font-size='120'%20font-weight='bold'%20fill='%23d4af37'%20text-anchor='middle'%20dy='.3em'%3E%F0%9F%92%95%3C/text%3E%3C/svg%3E%22,%22sizes%22:%22192x192%22,%22type%22:%22image/svg+xml%22,%22purpose%22:%22any%22},{%22src%22:%22data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'%3E%3Crect%20fill='%231a1a1a'%20width='512'%20height='512'/%3E%3Ctext%20x='50%25'%20y='50%25'%20font-size='300'%20font-weight='bold'%20fill='%23d4af37'%20text-anchor='middle'%20dy='.3em'%3E%F0%9F%92%95%3C/text%3E%3C/svg%3E%22,%22sizes%22:%22512x512%22,%22type%22:%22image/svg+xml%22,%22purpose%22:%22maskable%22}],%22categories%22:[%22lifestyle%22],%22screenshots%22:[{%22src%22:%22data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20540%201080'%3E%3Crect%20fill='%231a1a1a'%20width='540'%20height='1080'/%3E%3Ctext%20x='50%25'%20y='50%25'%20font-size='100'%20font-weight='bold'%20fill='%23d4af37'%20text-anchor='middle'%20dy='.3em'%3EWedding%20Invite%3C/text%3E%3C/svg%3E%22,%22sizes%22:%22540x1080%22,%22type%22:%22image/svg+xml%22,%22form_factor%22:%22narrow%22}]}">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%231a1a1a' width='180' height='180'/><text x='50%' y='50%' font-size='100' font-weight='bold' fill='%23d4af37' text-anchor='middle' dy='.3em'>💕</text></svg>">
+    <link rel="apple-touch-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%231a1a1a' width='180' height='180'/><text x='50%' y='50%' font-size='100' font-weight='bold' fill='%23d4af37' text-anchor='middle' dy='.3em'>💕</text></svg>">
+
+    <title>Sarah & David's Wedding</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Install Banner -->
+    <div id="install-banner"
+        style="display: none; position: fixed; bottom: 20px; left: 20px; right: 20px; z-index: 2000; background: rgba(212, 175, 55, 0.1); border: 2px solid #d4af37; border-radius: 10px; padding: 1.5rem; max-width: 400px; margin-left: auto; margin-right: auto;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+            <div>
+                <p style="color: #d4af37; font-weight: 600; margin-bottom: 0.5rem;">Install Wedding Invite</p>
+                <p style="color: rgba(232, 232, 232, 0.7); font-size: 0.9rem;">Add to your home screen for quick access
+                </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+                <button id="install-btn"
+                    style="background: #d4af37; color: #1a1a1a; padding: 0.5rem 1rem; border-radius: 5px; border: none; cursor: pointer; font-weight: 600;">Install</button>
+                <button id="close-install-btn"
+                    style="background: transparent; color: #d4af37; border: 1px solid #d4af37; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">S & D</div>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#details">Details</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#rsvp">RSVP</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#home">Home</a>
+            <a href="#details">Details</a>
+            <a href="#schedule">Schedule</a>
+            <a href="#rsvp">RSVP</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="hero-label">You are cordially invited to</div>
+                <h1>The Wedding of<span class="names">Sarah & David</span></h1>
+                <p>Join us for an unforgettable celebration of love, laughter, and lasting memories</p>
+                <div class="cta-buttons">
+                    <button class="btn-primary" onclick="scrollToSection('rsvp')">RSVP Now</button>
+                    <button class="btn-secondary" onclick="scrollToSection('details')">View Details</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Details Section -->
+        <section id="details" class="details">
+            <div>
+                <h2 class="section-title">Celebration Details</h2>
+                <div class="details-grid">
+                    <div class="detail-card">
+                        <div class="detail-icon">📅</div>
+                        <h3>Date & Time</h3>
+                        <p>Saturday, June 15, 2024<br>4:00 PM - Midnight</p>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-icon">📍</div>
+                        <h3>Venue</h3>
+                        <p>The Grand Ballroom<br>123 Garden Lane, City, State 12345</p>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-icon">👔</div>
+                        <h3>Dress Code</h3>
+                        <p>Black Tie Optional<br>Cocktail Attire Encouraged</p>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-icon">🎁</div>
+                        <h3>Registry</h3>
+                        <p>Gifts are appreciated but not required<br><a href="#"
+                                style="color: var(--accent); text-decoration: none;">View Registry</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Schedule Section -->
+        <section id="schedule" class="schedule">
+            <div style="width: 100%; max-width: 600px;">
+                <h2 class="section-title">Timeline</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot">🎊</div>
+                        <div class="timeline-content">
+                            <h4>Ceremony</h4>
+                            <p>4:00 PM - Join us for the exchange of vows</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot">🍽️</div>
+                        <div class="timeline-content">
+                            <h4>Cocktail Hour</h4>
+                            <p>5:30 PM - Drinks & appetizers on the terrace</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot">🎉</div>
+                        <div class="timeline-content">
+                            <h4>Reception & Dinner</h4>
+                            <p>6:30 PM - Dancing, dinner, and celebration</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP Section -->
+        <section id="rsvp" class="rsvp">
+            <div class="form-container">
+                <h2 class="section-title">RSVP</h2>
+                <form id="rsvp-form">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guests">Number of Guests *</label>
+                        <select id="guests" name="guests" required>
+                            <option value="">Select number of guests</option>
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                            <option value="5">5+ Guests</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dietary">Dietary Restrictions</label>
+                        <input type="text" id="dietary" name="dietary" placeholder="e.g., Vegetarian, Gluten-free">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Will you be attending? *</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="radio" name="attending" value="yes" required> Yes, I'll be there
+                            </label>
+                            <label>
+                                <input type="radio" name="attending" value="no" required> Sorry, I can't make it
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Special Message (Optional)</label>
+                        <textarea id="message" name="message"
+                            placeholder="Share your congratulations or any special message..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit RSVP</button>
+                    <div id="form-message" class="form-message"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>With love and celebration</p>
+        <div class="social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
+        </div>
+        <p style="margin-top: 1.5rem; font-size: 0.85rem;">© 2024 Sarah & David. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
